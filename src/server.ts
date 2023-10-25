@@ -1,14 +1,19 @@
 import express from 'express'
 import { database } from './database'
+import { adminJs, adminJsRouter } from './admin'
 
 const app = express()
 
-const PORT = process.env.PORT || 3000
+app.use(express.static('public'))
 
-app.listen(PORT, () => {
-  database.authenticate().then(() => {
+app.use(adminJs.options.rootPath, adminJsRouter)
+
+const PORT = process.env.port || 3000
+
+app.listen(PORT, async () => {
+  await database.authenticate().then(() => {
     console.log('DB connection successfull.')
   })
-  console.log(`Server started successfuly at port ${PORT}`)
-})
 
+  console.log(`Server started successfuly at port ${PORT}.`)
+})
