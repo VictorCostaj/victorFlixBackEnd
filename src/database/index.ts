@@ -1,6 +1,7 @@
-import {sequelize}  from 'sequelize'
+import { Sequelize } from 'sequelize';
 
-export const database = new sequelize ({  //instancia 
+
+export const database = new Sequelize ({  //instancia 
     dialect: 'postgres',
     host: 'localhost',
     port: 5432,
@@ -12,4 +13,4 @@ export const database = new sequelize ({  //instancia
     }
 })
 
-export { sequelize }
+export { Sequelize }
