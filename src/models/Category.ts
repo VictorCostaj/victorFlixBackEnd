@@ -13,7 +13,7 @@ export interface CategoryCreationAttributes extends Optional<CategoryAttributes,
 
 export interface CategoryInstance extends Model<CategoryAttributes, CategoryCreationAttributes>, CategoryAttributes {}
 
-const Category = database.define<CategoryInstance, CategoryCreationAttributes>('Category', {
+export const Category = database.define<CategoryInstance, CategoryCreationAttributes>('Category', {
   id: {
     allowNull: false,
     autoIncrement: true,

@@ -5,6 +5,7 @@ import AdminJsExpress from '@adminjs/express'
 import AdminJsSequelize from '@adminjs/sequelize'
 import { database } from '../database'
 import { adminJsResources } from './resource'
+import sequelize from 'sequelize'
 
 AdminJs.registerAdapter(AdminJsSequelize)
 
