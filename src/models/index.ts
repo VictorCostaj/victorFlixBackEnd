@@ -3,6 +3,7 @@
 import {Category} from './Category'
 import { Course } from './Course'
 import { Episode } from './Episode'
+import { User } from './User'
 
 Category.hasMany(Course)
 
@@ -13,5 +14,6 @@ Course.hasMany(Episode)
 export {
   Course,
   Category,
-  Episode
+  Episode,
+  User
 }
