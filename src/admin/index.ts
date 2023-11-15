@@ -1,60 +1,36 @@
 // src/adminjs/index.ts
+import AdminJs from "adminjs";
+import AdminJsExpress from "@adminjs/express";
+import AdminJsSequelize from "@adminjs/sequelize";
+import { database } from "../database";
+import { adminJsResources } from "./resource";
+import { where } from "sequelize/dist";
+import { User } from "../models/User";
+import bcrypt from "bcrypt";
+import { locale } from "./locale";
+import { Category, Course, Episode } from "../models";
+import { dashboardOptions } from "./dashboard";
+import { brandingOptions } from "./branding";
+import { authtenticationOptions } from "./authentication";
 
-import AdminJs from 'adminjs'
-import AdminJsExpress from '@adminjs/express'
-import AdminJsSequelize from '@adminjs/sequelize'
-import { database } from '../database'
-import { adminJsResources } from './resource'
-import { where } from 'sequelize/dist'
-import { User } from '../models/User'
-import bcrypt from 'bcrypt'
-
-AdminJs.registerAdapter(AdminJsSequelize)
+AdminJs.registerAdapter(AdminJsSequelize);
 
 export const adminJs = new AdminJs({
   databases: [database],
-  rootPath: '/admin',
+  rootPath: "/admin",
   resources: adminJsResources,
-  branding: {
-    companyName: 'VictorFlix',
-    logo: '/logo-preview.png',
-    theme: {
-      colors: {
-        primary100: '#ff0043',
-	      primary80: '#ff1a57',
-	      primary60: '#ff3369',
-	      primary40: '#ff4d7c',
-		    primary20: '#ff668f',
-	      grey100: '#151515',
-	      grey80: '#333333',
-	      grey60: '#4d4d4d',
-	      grey40: '#666666',
-	      grey20: '#dddddd',
-	      filterBg: '#333333',
-	      accent: '#151515',
-	      hoverBg: '#151515',
-      }
-    }
-  }
-})
+  dashboard: dashboardOptions,
+  locale: locale,
+  branding: brandingOptions,
+});
 
 // export const adminJsRouter = AdminJsExpress.buildRouter (adminJs)
-export const adminJsRouter = AdminJsExpress.buildAuthenticatedRouter(adminJs, {
-  authenticate: async(email, password) => {
-    const user = await User.findOne({ where: {email} })
-
-    if (user && user.role === 'admin'){
-      const matched = await bcrypt.compare(password, user.password)
-      if(matched) {
-        return user
-      }
-    }
-     return false
-  },
-
-  cookiePassword: 'senha-de-cookie', 
-}, null, {
-  resave: false,
-  saveUninitialized: false
-})
-
+export const adminJsRouter = AdminJsExpress.buildAuthenticatedRouter(
+  adminJs,
+  authtenticationOptions,
+  null,
+  {
+    resave: false,
+    saveUninitialized: false,
+  }
+);
