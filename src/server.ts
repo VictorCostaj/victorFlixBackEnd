@@ -1,19 +1,24 @@
-import express from 'express'
-import { database } from './database'
-import { adminJs, adminJsRouter } from './admin'
+// src/server.ts
 
-const app = express()
+import express from "express";
+import { database } from "./database";
+import { router } from "./routes";
+import { adminJs, adminJsRouter } from "./admin/index";
 
-app.use(express.static('public'))
+const app = express();
 
-app.use(adminJs.options.rootPath, adminJsRouter)
+app.use(express.static("public"));
 
-const PORT = process.env.port || 3000
+app.use(router);
+
+app.use(adminJs.options.rootPath, adminJsRouter);
+
+const PORT = process.env.port || 3000;
 
 app.listen(PORT, async () => {
   await database.authenticate().then(() => {
-    console.log('DB connection successfull.')
-  })
+    console.log("DB connection successfull.");
+  });
 
-  console.log(`Server started successfuly at port ${PORT}.`)
-})
+  console.log(`Server started successfuly at port ${PORT}.`);
+});
