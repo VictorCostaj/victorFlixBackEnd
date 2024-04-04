@@ -3,15 +3,15 @@
 import { BrandingOptions } from "adminjs";
 
 export const brandingOptions: BrandingOptions = {
-  companyName: "VictorFlix",
-  logo: "/logo-preview.png",
+  companyName: "FlixList",
+  logo: "/FlixList-logo.png",
   theme: {
     colors: {
-      primary100: "#ff0043",
+      primary100: "#F17626",
       primary80: "#ff1a57",
-      primary60: "#ff3369",
+      primary60: "#FFFFFFFF",
       primary40: "#ff4d7c",
-      primary20: "#ff668f",
+      primary20: "#f17635",
       grey100: "#151515",
       grey80: "#333333",
       grey60: "#4d4d4d",
