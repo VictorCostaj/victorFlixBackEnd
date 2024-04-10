@@ -1,11 +1,13 @@
 // src/routes.ts
 
 import express from "express";
+import { authController } from "./controllers/authController";
 import { categoriesController } from "./controllers/categoriesController";
 import {coursesController}  from "./controllers/coursesControllers";
 import { episodesController } from "./controllers/episodeController";
 
 const router = express.Router();
+router.post("/auth/register", authController.register)
 
 router.get("/categories", categoriesController.index);
 router.get("/categories/:id", categoriesController.show);

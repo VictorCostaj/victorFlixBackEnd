@@ -9,6 +9,8 @@ const app = express();
 
 app.use(express.static("public"));
 
+app.use(express.json()); //requiseição para usar o body
+
 app.use(router);
 
 app.use(adminJs.options.rootPath, adminJsRouter);
