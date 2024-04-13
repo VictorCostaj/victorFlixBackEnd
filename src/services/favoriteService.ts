@@ -32,4 +32,14 @@ export const favoriteService = {
 
     return favorite;
   },
+
+  // deletando favorito
+  delete: async (userId: number, courseId: number) => {
+    await Favorite.destroy({
+      where: {
+        userId,
+        courseId,
+      },
+    });
+  },
 };

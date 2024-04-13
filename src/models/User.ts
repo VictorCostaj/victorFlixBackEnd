@@ -19,11 +19,17 @@ export interface User {
 
 export interface UserCreationAttributes extends Optional<User, "id"> {}
 
+// export interface UserInstance
+//   extends Model<User, UserCreationAttributes>,
+//     User {
+//       checkPassword:(password: string, callbackfn: CheckPasswordCallBack) => void
+//     }
+
 export interface UserInstance
-  extends Model<User, UserCreationAttributes>,
+  extends Model<UserCreationAttributes, UserCreationAttributes>,
     User {
-      checkPassword: (password: string, callbackfn: CheckPasswordCallBack) => void
-    }
+  checkPassword: (password: string, callbackfn: CheckPasswordCallBack) => void;
+}
 
 export const User = database.define<UserInstance, User>(
   "users",
@@ -84,15 +90,12 @@ export const User = database.define<UserInstance, User>(
 //                                        Recebe uma senha e depois uma função que será   executtada depois que realizar a verificação
 // -usamos o compare do próprio bcrypt para realizar a comparação:
 
-User.prototype.checkPassword = function (
-  password: string,
-  callbackfn: CheckPasswordCallBack
-) {
+User.prototype.checkPassword = function (password: string, callbackfn: (err: Error | undefined, isSame: boolean) => void) {
   bcrypt.compare(password, this.password, (err, isSame) => {
     if (err) {
-      callbackfn(err);
+      callbackfn(err, false)
     } else {
-      callbackfn(err, isSame);
+      callbackfn(err, isSame)
     }
-  });
-};
+  })
+}
