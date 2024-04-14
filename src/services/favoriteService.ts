@@ -33,6 +33,16 @@ export const favoriteService = {
     return favorite;
   },
 
+  isFavorited: async (userId: number, courseId: number) => {
+    const favorite = await Favorite.findOne({
+      where: {
+        userId,
+        courseId
+      }
+    })
+    return favorite !== null
+  },
+
   // deletando favorito
   delete: async (userId: number, courseId: number) => {
     await Favorite.destroy({
