@@ -17,7 +17,9 @@ export interface EpisodeCreationAttributes
   extends Optional<Episode, 'id' | 'videoUrl' | 'secondsLong' > {}
 
 export interface EpisodeInstance
-  extends Model<Episode, EpisodeCreationAttributes>, Episode {}
+  extends Model<Episode, EpisodeCreationAttributes>, Episode {
+  [x: string]: any;
+}
 
 export const Episode = database.define<EpisodeInstance, Episode>('Episode', {
   id: {

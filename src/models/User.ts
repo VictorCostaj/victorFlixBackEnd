@@ -28,6 +28,7 @@ export interface UserCreationAttributes extends Optional<User, "id"> {}
 export interface UserInstance
   extends Model<UserCreationAttributes, UserCreationAttributes>,
     User {
+  Episodes: EpisodeInstance[];
   checkPassword: (password: string, callbackfn: CheckPasswordCallBack) => void;
 }
 
