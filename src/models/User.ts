@@ -3,6 +3,7 @@
 import { database } from "../database";
 import { DataTypes, Model, Optional } from "sequelize";
 import bcrypt from "bcrypt";
+import { EpisodeInstance } from "./Episode";
 
 type CheckPasswordCallBack = (err?: Error, isSame?: boolean) => void;
 

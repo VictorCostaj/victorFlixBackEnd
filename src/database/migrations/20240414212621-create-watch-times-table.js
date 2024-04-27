@@ -1,3 +1,5 @@
+// src/database/migrations/XXXXXXXXXXXXXX-create-watch-times-table
+
 'use strict';
 
 module.exports = {

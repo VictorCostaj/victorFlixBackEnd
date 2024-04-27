@@ -1,7 +1,7 @@
 // src/models/Category.ts
 
 import { DataTypes, Model, Optional } from 'sequelize';
-import { database } from '../database'; // Certifique-se de importar a instância correta do Sequelize
+import { database} from '../database'; // Certifique-se de importar a instância correta do Sequelize
 
 export interface CategoryAttributes {
   id: number;

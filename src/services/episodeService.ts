@@ -42,6 +42,7 @@ export const episodeService = {
       fs.createReadStream(filePath).pipe(res);
     }
   },
+
   getWatchTime: async (userId: number, episodeId: number) => {
     const watchTime = await WatchTime.findOne({
       attributes: ["seconds"],
@@ -49,7 +50,7 @@ export const episodeService = {
         userId,
         episodeId,
       },
-    });
+    }); //pega um WactTime de um usuário específico. 
 
     return watchTime;
   },
