@@ -3,7 +3,8 @@
 import { Response } from "express";
 import fs from "fs";
 import path from "path";
-import { WatchTime, WatchTimeAttributes } from "../models/WatchTime";
+import { WatchTimeAttributes } from "../models/WatchTime";
+import { WatchTime } from "../models";
 
 export const episodeService = {
   streamEpisodeToResponse: (
@@ -50,7 +51,7 @@ export const episodeService = {
         userId,
         episodeId,
       },
-    }); //pega um WactTime de um usuário específico. 
+    }); //pega um WacthTime de um usuário específico.
 
     return watchTime;
   },
@@ -66,7 +67,6 @@ export const episodeService = {
     if (watchTimeAlreadyExists) {
       watchTimeAlreadyExists.seconds = seconds;
       await watchTimeAlreadyExists.save();
-
       return watchTimeAlreadyExists;
     } else {
       const watchTime = await WatchTime.create({
